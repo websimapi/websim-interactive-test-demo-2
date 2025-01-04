@@ -1,0 +1,111 @@
+<html><head><base href="." /><title>Interactive Demo</title><style>
+body {
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+}
+
+.animated-circle {
+    width: 200px;
+    height: 200px;
+    margin: 40px auto;
+    position: relative;
+    cursor: pointer;
+}
+
+.pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff3366, #ff6b6b);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(255, 51, 102, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 51, 102, 0);
+    }
+}
+
+.counter {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+button {
+    background: linear-gradient(45deg, #ff3366, #ff6b6b);
+    border: none;
+    padding: 15px 30px;
+    color: white;
+    font-size: 1.2em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+</style></head><body>
+<div class="container">
+    <h1>Interactive Test Demo</h1>
+    <div class="animated-circle">
+        <div class="pulse"></div>
+    </div>
+    <div class="counter">0</div>
+    <button onclick="increment()">Click Me!</button>
+    <button onclick="reset()">Reset</button>
+</div>
+
+<script>
+let count = 0;
+const counterElement = document.querySelector('.counter');
+
+function increment() {
+    count++;
+    counterElement.textContent = count;
+    updatePulse();
+}
+
+function reset() {
+    count = 0;
+    counterElement.textContent = count;
+    updatePulse();
+}
+
+function updatePulse() {
+    const pulse = document.querySelector('.pulse');
+    pulse.style.animation = 'none';
+    pulse.offsetHeight; // Trigger reflow
+    pulse.style.animation = 'pulse 2s infinite';
+}
+
+// Add click effect to the pulse circle
+document.querySelector('.animated-circle').addEventListener('click', increment);
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
